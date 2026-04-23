@@ -2047,7 +2047,7 @@ class PlayState extends MusicBeatState
 				if(SONG.song.toLowerCase() == 'termination' && storyDifficulty==1)
 					modchartFileName == "/modchartUNFAIR";
 
-				var result = LuaL.dostring(lua, Paths.lua(PlayState.SONG.song.toLowerCase() + modchartFileName)); // execute le file
+				var result = LuaL.dostring(lua, Assets.getText(Paths.lua(PlayState.SONG.song.toLowerCase() + modchartFileName))); // execute le file
 	
 				if (result != 0)
 					throw('COMPILE ERROR\n' + getLuaErrorMessage(lua));
