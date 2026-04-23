@@ -4144,9 +4144,6 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-		if (!loadRep)
-			rep.SaveReplay();
-
 		#if cpp
 		if (executeModchart)
 		{
