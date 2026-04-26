@@ -25,12 +25,6 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['Bopeebo', 'Fresh', 'Dadbattle'],
-		['Spookeez', 'South', "Monster"],
-		['Pico', 'Philly', "Blammed"],
-		['Satin-Panties', "High", "Milf"],
-		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
-		['Senpai', 'Roses', 'Thorns'],
 		['Carefree', 'Careless', 'Censory-Overload','Terminate']
 	];
 	//I HAVE NO IDEA WHY THE FUCK THE LAST ITEM IN THE ARRAY JUST DOESN'T WANT TO BE DISPLAYED, SO FUCK YOU I'M DOING THIS DISGUSTING SHIT TO COUNTER IT UNTIL IT'S FIXED
@@ -38,37 +32,19 @@ class StoryMenuState extends MusicBeatState
 	//Actually, this solution ain't so bad. I can hide the 4th song to be a surprise :3
 	var weekDataSTRING:Array<Dynamic> = [
 		['Tutorial',""],
-		['Bopeebo', 'Fresh', 'Dadbattle',""],
-		['Spookeez', 'South', "Monster",""],
-		['Pico', 'Philly', "Blammed",""],
-		['Satin-Panties', "High", "Milf",""],
-		['Cocoa', 'Eggnog', 'Winter-Horrorland',""],
-		['Senpai', 'Roses', 'Thorns',""],
 		['Carefree', 'Careless', 'Censory-Overload',""]
 	];
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
-		['dad', 'bf', 'gf'],
-		['spooky', 'bf', 'gf'],
-		['pico', 'bf', 'gf'],
-		['mom', 'bf', 'gf'],
-		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf'],
 		['qt', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
 		"How to Funk",
-		"Daddy Dearest",
-		"Spooky Month",
-		"PICO",
-		"MOMMY MUST MURDER",
-		"RED SNOW",
-		"Hating Simulator ft. Moawling",
 		"Cutie"
 	];
 
@@ -137,7 +113,9 @@ class StoryMenuState extends MusicBeatState
 
 		for (i in 0...weekData.length)
 		{
-			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, i);
+			var iconIndex:Int = (i == 1) ? 7 : i;
+
+			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, iconIndex);
 			weekThing.y += ((weekThing.height + 20) * i);
 			weekThing.targetY = i;
 			grpWeekText.add(weekThing);
@@ -316,7 +294,11 @@ class StoryMenuState extends MusicBeatState
 			PlayState.storyDifficulty = curDifficulty;
 
 			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
-			PlayState.storyWeek = curWeek;
+			if (curWeek == 1) {
+				PlayState.storyWeek = 7;
+			} else {
+				PlayState.storyWeek = curWeek;
+			}
 			PlayState.campaignScore = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
