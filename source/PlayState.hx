@@ -1776,6 +1776,10 @@ class PlayState extends MusicBeatState
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
 
+		#if mobile
+		addHitboxDodge();
+		#end
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -4604,11 +4608,14 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == "termination" || SONG.song.toLowerCase()=='tutorial'){
 			//Dodge code, yes it's bad but oh well. -Haz
 			//var dodgeButton = controls.ACCEPT; //I have no idea how to add custom controls so fuck it. -Haz
+			#if mobile
+			dodgeButton.visible = true;
+			#end
 
-			if(FlxG.keys.justPressed.SPACE)
+			if(FlxG.keys.justPressed.SPACE #if mobile || dodgeButton.buttonD.justPressed #end)
 				trace('butttonpressed');
 
-			if(FlxG.keys.justPressed.SPACE && !bfDodging && bfCanDodge){
+			if(FlxG.keys.justPressed.SPACE #if mobile || dodgeButton.buttonD.justPressed #end && !bfDodging && bfCanDodge){
 				trace('DODGE START!');
 				bfDodging = true;
 				bfCanDodge = false;
@@ -4644,22 +4651,22 @@ class PlayState extends MusicBeatState
 
 
 		// HOLDING
-		var up = controls.UP;
-		var right = controls.RIGHT;
-		var down = controls.DOWN;
-		var left = controls.LEFT;
+		var up = controls.UP #if mobile || hitbox.buttonUp.pressed #end;
+		var right = controls.RIGHT #if mobile || hitbox.buttonRight.pressed #end;
+		var down = controls.DOWN #if mobile || hitbox.buttonDown.pressed #end;
+		var left = controls.LEFT #if mobile || hitbox.buttonLeft.pressed #end;
 
 		//Press? -Haz
-		var upP = controls.UP_P;
-		var rightP = controls.RIGHT_P;
-		var downP = controls.DOWN_P;
-		var leftP = controls.LEFT_P;
+		var upP = controls.UP_P #if mobile || hitbox.buttonUp.justPressed #end;
+		var rightP = controls.RIGHT_P #if mobile || hitbox.buttonRight.justPressed #end;
+		var downP = controls.DOWN_P #if mobile || hitbox.buttonDown.justPressed #end;
+		var leftP = controls.LEFT_P #if mobile || hitbox.buttonLeft.justPressed #end;
 
 		//Release? -Haz
-		var upR = controls.UP_R;
-		var rightR = controls.RIGHT_R;
-		var downR = controls.DOWN_R;
-		var leftR = controls.LEFT_R;
+		var upR = controls.UP_R #if mobile || hitbox.buttonUp.justReleased #end;
+		var rightR = controls.RIGHT_R #if mobile || hitbox.buttonRight.justReleased #end;
+		var downR = controls.DOWN_R #if mobile || hitbox.buttonDown.justReleased #end;
+		var leftR = controls.LEFT_R #if mobile || hitbox.buttonLeft.justReleased #end;
 
 		if (loadRep) // replay code
 		{
