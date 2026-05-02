@@ -73,6 +73,8 @@ class Main extends Sprite
 		fpsCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
 		toggleFPS(FlxG.save.data.fps);
+
+		FlxG.android.preventDefaultKeys = [BACK];
 	}
 
 	var game:FlxGame;
