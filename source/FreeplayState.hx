@@ -145,6 +145,10 @@ class FreeplayState extends MusicBeatState
 			trace(md);
 		 */
 
+		#if mobile
+		addVirtualPad(FULL, A_B);
+		#end
+
 		super.create();
 	}
 
@@ -184,9 +188,9 @@ class FreeplayState extends MusicBeatState
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
-		var accepted = controls.ACCEPT;
+		var upP = controls.UP_P #if mobile || virtualPad.buttonUp.justPressed #end;
+		var downP = controls.DOWN_P #if mobile || virtualPad.buttonDown.justPressed #end;
+		var accepted = controls.ACCEPT #if mobile || virtualPad.buttonA.justPressed #end;
 
 		if (upP)
 		{
@@ -198,13 +202,13 @@ class FreeplayState extends MusicBeatState
 		}
 
 		if(!(songs[curSelected].songName.toLowerCase()=="termination")){	//Only allow the difficulty to be changed if the song isn't termination.
-		if (controls.LEFT_P)
+		if (controls.LEFT_P #if mobile || virtualPad.buttonLeft.justPressed #end)
 			changeDiff(-1);
-		if (controls.RIGHT_P)
+		if (controls.RIGHT_P #if mobile || virtualPad.buttonRight.justPressed #end)
 			changeDiff(1);
 		}
 
-		if (controls.BACK)
+		if (controls.BACK #if mobile || virtualPad.buttonB.justPressed #end)
 		{
 			FlxG.switchState(new MainMenuState());
 		}
