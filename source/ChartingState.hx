@@ -710,6 +710,7 @@ class ChartingState extends MusicBeatState
 		{
 			lastSection = curSection;
 
+			FlxG.mouse.visible = false;
 			PlayState.SONG = _song;
 			FlxG.sound.music.stop();
 			vocals.stop();
