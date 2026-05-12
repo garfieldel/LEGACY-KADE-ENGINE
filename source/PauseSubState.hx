@@ -194,11 +194,11 @@ class PauseSubState extends MusicBeatSubstate
 					DiscordClient.changePresence("Chart Editor", null, null, true);
 					#end
 					#if cpp
-					if (lua != null)
+					if (PlayState.lua != null)
 					{
-					    Lua.close(lua);
-					    lua = null;
-			        }
+						Lua.close(PlayState.lua);
+						PlayState.lua = null;
+					}
 					#end
 					FlxG.switchState(new ChartingState());
 				case "Exit to menu":
